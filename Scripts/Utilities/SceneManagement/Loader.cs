@@ -1,7 +1,5 @@
 ﻿using RH.Utilities.SceneManagement.Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RH.Utilities.SceneManagement
@@ -33,11 +31,16 @@ namespace RH.Utilities.SceneManagement
         }
 
         #region CALL FROM ANIMATOR
-        public void InvokeOnShowEvent() => _onShow();
+        public void InvokeOnShowEvent()
+        {
+            _onShow.Invoke();
+            _onShow = null;
+        }
         public void InvokeOnHideEvent()
         {
             gameObject.SetActive(false);
-            _onHide();
+            _onHide.Invoke();
+            _onHide = null;
         }
         #endregion
     }

@@ -1,4 +1,6 @@
-﻿using RH.Utilities.SceneManagement;
+﻿using Cook.UI;
+using RH.Utilities.ResourcesManagement;
+using RH.Utilities.SceneManagement;
 using RH.Utilities.SceneManagement.Core;
 using RH.Utilities.SceneManagement.Test;
 using RH.Utilities.Singleton;
@@ -13,9 +15,10 @@ public class AppStartBehavior : MonoSingleton<AppStartBehavior>
     {
         AppLinks.Instance.Loader.Init();
         DataManager.CreateInstance();
+        GameUIManager.CreateInstance(AppLinks.Instance.WindowsParent, new DefaultAssetsFactory());
 
         await Task.Delay(200);
 
-        GameSceneChanger.ShowFirstScene();
+        GameSceneChanger.ShowMenuScene();
     }
 }

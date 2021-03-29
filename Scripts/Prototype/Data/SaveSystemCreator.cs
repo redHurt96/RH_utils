@@ -1,4 +1,5 @@
 ﻿using RH.Utilities.SavingSystem;
+using RH.Utilities.SavingSystem.Local;
 using UnityEngine;
 
 namespace RH.Prototype.Data
@@ -16,9 +17,9 @@ namespace RH.Prototype.Data
             ISaveSystem system;
 
 #if UNITY_EDITOR
-            system = new LocalBinSaveSystem(path, fileName);
-#else
             system = new LocalJsonSaveSystem(path, fileName);
+#else
+            system = new LocalBinSaveSystem(path, fileName);
 #endif
 
             return system;

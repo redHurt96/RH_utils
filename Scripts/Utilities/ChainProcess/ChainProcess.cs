@@ -35,7 +35,13 @@ namespace RH.Utilities.Processes
             executor.ExecuteProcess(Executing());
         }
 
-        public override void Restart() => SetState(ProcessState.Wait);
+        public override void Restart()
+        {
+            foreach (var item in items)
+                item.Restart();
+
+            base.Restart();
+        }
 
         public void AddAsyncMethod(Action<Action> action) => AddItem(new ChainAsyncItem(action));
         public void AddSyncMethod(Action action) => AddItem(new ChainSyncItem(action));

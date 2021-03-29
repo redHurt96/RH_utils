@@ -48,9 +48,9 @@ public class DataManager
         _libraryLoader = SaveSystemCreator.CreateLibraryLoader();
 
         if (_libraryLoader.CanLoad)
-            throw new System.Exception($"Can't find game library");
-        else
             _libraryLoader.Load<GameLibraryData>(GetLibrary);
+        else
+            throw new System.Exception($"Can't find game library");
 
         void GetLibrary(GameLibraryData data) => GameLibrary.CreateInstance(data);
     }

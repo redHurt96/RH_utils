@@ -8,7 +8,7 @@ namespace RH.Utilities.SceneManagement.Test
     /// </summary>
     public static class GameSceneChanger
     {
-        public static void ShowFirstScene() => SceneChanger.ChangeScene(1); 
-        public static void ShowSecondScene() => SceneChanger.ChangeScene(2);
+        public static void ShowMenuScene() => SceneChanger.ChangeScene(1); 
+        public static void ShowKitchenScene() => SceneChanger.ChangeScene(2);
     }
 }

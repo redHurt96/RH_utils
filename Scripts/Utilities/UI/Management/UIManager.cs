@@ -9,7 +9,7 @@ namespace RH.Utilities.UI.Management
 {
     public class UIManager
     {
-        public static UIManager Instance;
+        public static UIManager Instance { get; protected set; }
 
         private readonly Transform _parent;
         private readonly Stack<UIElement> _showedElements = new Stack<UIElement>();
@@ -17,22 +17,12 @@ namespace RH.Utilities.UI.Management
 
         private bool _hasOpenedElements => _showedElements.Count > 0;
 
-        private UIManager(Transform parent, IAssetsFactory factory)
+        protected UIManager(Transform parent, IAssetsFactory factory)
         {
             _parent = parent;
+            _assetsFactory = factory;
 
-            if (factory != null)
-                _assetsFactory = factory;
-            else
-                _assetsFactory = new DefaultAssetsFactory();
-        }
-
-        public static UIManager CreateInstance(Transform parent, IAssetsFactory factory = null)
-        {
-            if (Instance == null)
-                Instance = new UIManager(parent, factory);
-
-            return Instance;
+            Instance = this;
         }
 
         public T Open<T>(string name, bool closeOthers = true) where T : UIElement => Open(name, closeOthers) as T;

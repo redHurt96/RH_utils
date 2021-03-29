@@ -18,6 +18,7 @@ namespace RH.Utilities.Processes
         public ChainMultiItem(string name) : base(name)
         {
             _asyncActions = new List<Action<Action>>();
+            _syncActions = new List<Action>();
 
             _callbacksCount = 0;
         }
@@ -33,6 +34,12 @@ namespace RH.Utilities.Processes
 
         public void AddAsyncMethod(Action<Action> action) => _asyncActions.Add(action);
         public void AddSyncMethod(Action action) => _syncActions.Add(action);
+
+        public override void Restart()
+        {
+            _callbacksCount = 0;
+            base.Restart();
+        }
 
         public override void Execute()
         {

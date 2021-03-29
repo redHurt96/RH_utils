@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace RH.Utilities.SavingSystem
+namespace RH.Utilities.SavingSystem.Local
 {
     public class LocalBinSaveSystem : LocalSaveSystem
     {
