@@ -1,4 +1,4 @@
-namespace RH.Prototype.Data.Player
+namespace RH.Prototype.Data
 { 
     public partial class PlayerData
     { 

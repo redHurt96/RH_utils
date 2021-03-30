@@ -1,6 +1,4 @@
-﻿using RH.Utilities.Singleton;
-
-namespace RH.Prototype.Data.Library
+﻿namespace RH.Prototype.Data
 {
     public class GameLibrary
     {

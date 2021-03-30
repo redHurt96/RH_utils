@@ -1,9 +1,9 @@
-﻿using RH.Prototype.Data.Library;
+﻿#if UNITY_EDITOR
+
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace RH.Prototype.Data.Editor
 {
     public class LibraryChecker
@@ -45,4 +45,5 @@ namespace RH.Prototype.Data.Editor
         }
     }
 }
+
 #endif

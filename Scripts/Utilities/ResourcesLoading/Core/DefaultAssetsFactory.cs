@@ -13,6 +13,10 @@ namespace RH.Utilities.ResourcesManagement
         public GameObject CreateObject(string assetName, Transform parent = null)
         {
             var loadableObject = Resources.Load(assetName);
+
+            if (loadableObject == null)
+                throw new Exception($"Asset named {assetName} not exist! Check asset name or folder with it.");
+
             var instantiatedObject = MonoBehaviour.Instantiate(loadableObject, parent) as GameObject;
 
             RenameGameObject(instantiatedObject);

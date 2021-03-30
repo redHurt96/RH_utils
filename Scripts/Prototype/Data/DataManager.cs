@@ -1,57 +1,56 @@
-﻿using RH.Prototype.Data;
-using RH.Prototype.Data.Library;
-using RH.Prototype.Data.Player;
-using RH.Utilities.SavingSystem;
-using UnityEngine;
+﻿using RH.Utilities.SavingSystem;
 
-public class DataManager
+namespace RH.Prototype.Data
 {
-    public static DataManager Instance { get; private set; }
-
-    private ISaveSystem _playerDataSaveSystem;
-    private ISaveSystem _libraryLoader;
-
-    private DataManager() 
+    public class DataManager
     {
-        Init();
-    }
+        public static DataManager Instance { get; private set; }
 
-    public static DataManager CreateInstance()
-    {
-        if (Instance == null)
-            Instance = new DataManager();
+        private ISaveSystem _playerDataSaveSystem;
+        private ISaveSystem _libraryLoader;
 
-        return Instance;
-    }
+        private DataManager()
+        {
+            Init();
+        }
 
-    public void Init()
-    {
-        InitLibrary();
-        InitPlayer();
-    }
+        public static DataManager CreateInstance()
+        {
+            if (Instance == null)
+                Instance = new DataManager();
 
-    private void InitPlayer()
-    {
-        _playerDataSaveSystem = SaveSystemCreator.CreatePlayerDataSaveSystem();
+            return Instance;
+        }
 
-        if (_playerDataSaveSystem.CanLoad)
-            _playerDataSaveSystem.Load<PlayerData>(LoadPlayer);
-        else
-            CreateNewPlayer();
-        
-        void LoadPlayer(PlayerData data) => Player.CreateInstance(data);
-        void CreateNewPlayer() => Player.CreateInstance();
-    }
+        public void Init()
+        {
+            InitLibrary();
+            InitPlayer();
+        }
 
-    private void InitLibrary()
-    {
-        _libraryLoader = SaveSystemCreator.CreateLibraryLoader();
+        private void InitPlayer()
+        {
+            _playerDataSaveSystem = SaveSystemCreator.CreatePlayerDataSaveSystem();
 
-        if (_libraryLoader.CanLoad)
-            _libraryLoader.Load<GameLibraryData>(GetLibrary);
-        else
-            throw new System.Exception($"Can't find game library");
+            if (_playerDataSaveSystem.CanLoad)
+                _playerDataSaveSystem.Load<PlayerData>(LoadPlayer);
+            else
+                CreateNewPlayer();
 
-        void GetLibrary(GameLibraryData data) => GameLibrary.CreateInstance(data);
+            void LoadPlayer(PlayerData data) => Player.CreateInstance(data);
+            void CreateNewPlayer() => Player.CreateInstance();
+        }
+
+        private void InitLibrary()
+        {
+            _libraryLoader = SaveSystemCreator.CreateLibraryLoader();
+
+            if (_libraryLoader.CanLoad)
+                _libraryLoader.Load<GameLibraryData>(GetLibrary);
+            else
+                throw new System.Exception($"Can't find game library");
+
+            void GetLibrary(GameLibraryData data) => GameLibrary.CreateInstance(data);
+        }
     }
 }
