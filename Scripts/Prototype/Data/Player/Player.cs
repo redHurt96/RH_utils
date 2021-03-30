@@ -1,9 +1,4 @@
-﻿using RH.Utilities.Singleton;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace RH.Prototype.Data.Player
+﻿namespace RH.Prototype.Data.Player
 {
     public class Player
     {
